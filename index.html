@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audio Test</title>
+</head>
+<body>
+
+<h2>GitHub Audio Test</h2>
+
+<button onclick="playAudio()">Play Audio</button>
+
+<p id="status">Waiting...</p>
+
+<script>
+
+const audio = new Audio(
+"https://p-venu.github.io/english/english_audios/english_zip_code.mp3"
+);
+
+function playAudio(){
+
+    document.getElementById("status").innerText = "Loading...";
+
+    audio.currentTime = 0;
+
+    audio.play()
+    .then(()=>{
+        document.getElementById("status").innerText = "Playing";
+    })
+    .catch((err)=>{
+        console.error(err);
+        document.getElementById("status").innerText = "Failed to play";
+    });
+
+}
+
+audio.onended = function(){
+    document.getElementById("status").innerText = "Finished";
+};
+
+audio.onerror = function(){
+    document.getElementById("status").innerText = "Audio Error";
+    console.log(audio.error);
+};
+
+</script>
+
+</body>
+</html>
